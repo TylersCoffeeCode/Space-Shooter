@@ -104,11 +104,7 @@ public class Player : MonoBehaviour
 
     IEnumerator TripleShotPowerDown()
     {
-        while (_isTripleShotActive)
-        {
             yield return new WaitForSeconds(5.0f);
             _isTripleShotActive = false;
-        }
-
     }
 }
