@@ -26,7 +26,6 @@ public class Powerup : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            //communicate with the player script
             Player player = collision.transform.GetComponent<Player>();
             if (player != null)
             {

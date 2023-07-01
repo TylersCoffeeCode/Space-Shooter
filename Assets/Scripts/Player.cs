@@ -45,7 +45,6 @@ public class Player : MonoBehaviour
     {
             _canFire = Time.time + _fireRate;
             
-            //if space key press
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 if (_isTripleShotActive)
@@ -57,11 +56,6 @@ public class Player : MonoBehaviour
                 Instantiate(_laserPrefab, new Vector3(transform.position.x, transform.position.y + 1.05f, 0), Quaternion.identity);
                 }
             }
-            //if tripleshotactive is true
-                //fire 3 lasers
-            //else fire 1 laser
-
-            //instantiate 3 lasers (prefab)
     }
     void CalculateMovement()
     {
