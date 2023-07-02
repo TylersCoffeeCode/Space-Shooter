@@ -18,6 +18,9 @@ public class Player : MonoBehaviour
     private bool _isTripleShotActive = false;
     [SerializeField]
     private GameObject _tripleShotPrefab;
+    [SerializeField]
+    private bool _speedboostActivated = false;
+    private float _speedboostSpeedMultiplier = 2.0f;
 
     void Start()
     {
@@ -63,6 +66,7 @@ public class Player : MonoBehaviour
         float verticalInput = Input.GetAxis("Vertical");
 
         Vector3 direction = new Vector3(horizontalInput, verticalInput, 0);
+
         transform.Translate(direction * _speed * Time.deltaTime);
 
         transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -3.8f, 0), 0);
@@ -72,7 +76,7 @@ public class Player : MonoBehaviour
         {
             transform.position = new Vector3(-11.3f, transform.position.y, 0);
         }
-        else if (transform.position.x <= -11)
+        else if (transform.position.x <= -11.3f)
         {
             transform.position = new Vector3(11.3f, transform.position.y, 0);
         }
@@ -98,7 +102,21 @@ public class Player : MonoBehaviour
 
     IEnumerator TripleShotPowerDown()
     {
-            yield return new WaitForSeconds(5.0f);
-            _isTripleShotActive = false;
+        yield return new WaitForSeconds(5.0f);
+        _isTripleShotActive = false;
+    }
+
+    public void SpeedPowerupActivated()
+    {
+        _speedboostActivated = true;
+        _speed *= _speedboostSpeedMultiplier;
+        StartCoroutine(SpeedboostPowerDown());
+    }
+
+    IEnumerator SpeedboostPowerDown()
+    {
+        yield return new WaitForSeconds(5.0f);
+        _speedboostActivated = false;
+        _speed /= _speedboostSpeedMultiplier;
     }
 }
